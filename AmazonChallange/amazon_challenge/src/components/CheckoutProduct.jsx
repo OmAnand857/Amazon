@@ -33,8 +33,8 @@ function CheckoutProduct(props){
                                    })}
                                         </div>
                                 </div>
-
-                                <button onClick={handleRemove}>Remove from Basket</button>
+                                   {!props.hiddenButton&&(                                <button onClick={handleRemove}>Remove from Basket</button>
+)}
                         </div>
                         
 

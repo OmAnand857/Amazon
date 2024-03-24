@@ -13,8 +13,10 @@ export const ContextProvider=(props)=>{
 export const UserContext=createContext(null);
 
 export const  UserContextProvider=(props)=>{
-    const [helloUser,setUser]=useState("");
+    const [helloUser,setUser]=useState('');
     return <UserContext.Provider value={{helloUser,setUser}}>
         {props.children}
     </UserContext.Provider>
 }
+
+

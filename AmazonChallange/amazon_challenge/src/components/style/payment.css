@@ -24,5 +24,12 @@
     width:300px;
     margin-left:20px;
     padding:10px;
-
+    text-align:center;
+}
+.payment_method>form>button{
+    background:#f0c14b;
+    border:1px solid;
+    margin-top:10px;
+    width:100%;
+    color:#111;
 }

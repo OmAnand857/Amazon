@@ -21,7 +21,7 @@ function handleSignIn(e){
     // Signed in 
     
     const user = userCredential.user;
-    console.log("usercredential.useron sign in",user.email)
+    console.log("usercredential.useron sign in",user)
     setUser(user.email);
 
     console.log("state wala user",helloUser);

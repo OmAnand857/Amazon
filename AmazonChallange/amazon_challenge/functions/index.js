@@ -39,15 +39,46 @@ app.get("/",(request,response)=>{
 })
 app.post('/payments/create',async(request,response)=>{
     const total=request.query.total;
-    console.log('payment Request received BOOM!!! for this amout>>>',total)
-    const paymentIntent =await stripe.paymentIntents.create({
+   console.log('payment Request received BOOM!!! for this amout>>>',total)
+
+  
+         const paymentIntent =await stripe.paymentIntents.create({
+        description: 'Software development services',
+        shipping: {
+          name: 'Jenny Rosen',
+          address: {
+            line1: '510 Townsend St',
+            postal_code: '98140',
+            city: 'San Francisco',
+            state: 'CA',
+            country: 'US',
+          },
+        },
         amount:total,
         currency:"usd",
     });
+    const customer = await stripe.customers.create({
+        name: 'Jenny Rosen',
+        address: {
+          line1: '510 Townsend St',
+          postal_code: '98140',
+          city: 'San Francisco',
+          state: 'CA',
+          country: 'US',
+        },
+      });
     console.log(paymentIntent);
     response.status(201).send({
-        clientSecret:paymentIntent.id,
+        clientSecret:paymentIntent.client_secret,
     })
-})
+  
+
+
+  
+  
+  }
+  
+    
+)
 //LISTEN COMMANDS
 exports.api=functions.https.onRequest(app);

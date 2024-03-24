@@ -1,14 +1,24 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "./style/checkout.css"
 import {useContext} from "react";
-import {Context} from "./Context.js";
+import {Context,SecretContext} from "./Context.js";
 import CheckoutProduct from "./CheckoutProduct.jsx";
 import Subtotal from "./Subtotal.jsx";
 import {UserContext} from "./Context.js";
 
 function Checkout(){
-    const item=useContext(Context);
     const userItem=useContext(UserContext);
+   
+    const {cart}=useContext(Context);
+
+
+
+
+
+
+
+
+
         return (
                 <div className="checkout">
                     <div className="checkout_left">
@@ -20,7 +30,7 @@ function Checkout(){
                             <h3>Hello , {userItem.helloUser}</h3>
                                 <h2 className="checkout_title">Your Shopping Basket</h2>
                                 {
-                                    item.cart.map((prod)=>{
+                                    cart.map((prod)=>{
                                         return <CheckoutProduct title={prod.title}
                                         price={prod.price}
                                         rating={prod.rating}

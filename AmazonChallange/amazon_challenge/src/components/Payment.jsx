@@ -4,61 +4,70 @@ import {UserContext, Context} from "./Context";
 import {useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import "./style/payment.css";
-import axios from "./axios";
 import CheckoutProduct from "./CheckoutProduct";
-
-import {useStripe,useElements,CardElement,PaymentElement} from '@stripe/react-stripe-js';
+import {db} from "./firebase1";
+import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
 const stripe =  require("stripe")('sk_test_51Oqg2NSHOjhcLLUqhXbsSVifJJPqH9hdiqiIN9EexqykH39N2Xshs6BhzKuR1C9Ns1Y1me21FioVjXAgm5d6LJM0003mB3SIMs');
 
 function Payment(){
 
         const {helloUser}=useContext(UserContext);
-        const {cart}=useContext(Context);
+        const {cart,setCart}=useContext(Context);
         const Navigate=useNavigate();
+        const [processing,setProcessing]=useState(false);
 
         let subtotal=0;
 for(var i=0;i<cart.length;i++){
     subtotal=subtotal+cart[i].price;
 }
 
-        //const stripe = useStripe();
-        const elements = useElements();
+const stripe = useStripe();
+const elements = useElements();
 
-        const [clientSecret,setClientSecret]=useState(null);
+const handleSubmit = async (event) => {
+  // We don't want to let default form submission happen here,
+  // which would refresh the page.
+  event.preventDefault();
 
-        useEffect(()=>{
-                        //generate the client secret that allows us to charge the customer
-                        const getClientSecret=async ()=>{
-                                        const response= await axios({
-                                                method:'post',
-                                                url:`/payments/create?total=${subtotal*100}`
-})
-                                        setClientSecret(response.data.clientSecret);
-                                        console.log('yeh hai axios se respose',response);
-                                }
-                                
-                                getClientSecret();
-        },[cart,subtotal])
+  if (!stripe || !elements) {
+    // Stripe.js hasn't yet loaded.
+    // Make sure to disable form submission until Stripe.js has loaded.
+    return;
+  }
 
-        const handleSubmit = async (event) => {
-                // We don't want to let default form submission happen here,
-                // which would refresh the page.
-                event.preventDefault();
-            
-                
-            
-               
-const paymentIntent = await stripe.paymentIntents.confirm(
-        clientSecret,
-        {
-          payment_method: 'pm_card_visa',
-          return_url: 'https://localhost:3000//',
-        }
-      ).then((paymentIntent)=>{
-                        Navigate("/");
-                });
-            
-              };
+  const result = await stripe.confirmPayment({
+    //`Elements` instance that was used to create the Payment Element
+    elements,
+    confirmParams: {
+},
+redirect: 'if_required'
+  });
+  console.log(result);
+
+  if (result.error) {
+    // Show error to your customer (for example, payment details incomplete)
+    console.log(result.error.message);
+    setProcessing(false);
+  } else {
+
+       if(helloUser){db
+        .collection('users')
+        .doc(helloUser)
+        .collection('orders')
+        .doc(result.paymentIntent.id)
+        .set({
+                basket:cart,
+                amount:result.paymentIntent.amount,
+                created:result.paymentIntent.created
+        })} 
+        setProcessing(false);
+        setCart([]);
+        Navigate('/Orders');
+    // Your customer will be redirected to your `return_url`. For some payment
+    // methods like iDEAL, your customer will be redirected to an intermediate
+    // site first to authorize the payment, then redirected to the `return_url`.
+  }
+};
 
 
 
@@ -107,10 +116,10 @@ const paymentIntent = await stripe.paymentIntents.confirm(
                         </div>
                         <div className="payment_method">
                         <form onSubmit={handleSubmit}>
-                                  <CardElement/>
-                                         <button disabled={!stripe}>Buy Now</button>
+                                  <PaymentElement/>
+                                         <button onClick={()=>{setProcessing(true)}} disabled={!stripe&&processing}>{processing?'processing just 1 sec':'Buy Now'}</button>
                         </form>
-                        <strong>{subtotal}</strong>
+                        <strong>${subtotal}</strong>
                         </div>
                 </div>
         </div>
