@@ -55,7 +55,7 @@ app.post('/payments/create',async(request,response)=>{
           },
         },
         amount:total,
-        currency:"usd",
+        currency:"inr",
     });
     const customer = await stripe.customers.create({
         name: 'Jenny Rosen',

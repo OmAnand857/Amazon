@@ -119,7 +119,7 @@ redirect: 'if_required'
                                   <PaymentElement/>
                                          <button onClick={()=>{setProcessing(true)}} disabled={!stripe&&processing}>{processing?'processing just 1 sec':'Buy Now'}</button>
                         </form>
-                        <strong>${subtotal}</strong>
+                        <strong>₹{subtotal}</strong>
                         </div>
                 </div>
         </div>

@@ -26,7 +26,7 @@ function CheckoutProduct(props){
                                     <p><h2>{props.title}</h2></p>
                                 </div>
                                 <div className="RatingPrice">
-                                       <span><small>$</small><strong>{props.price}</strong></span> 
+                                       <span><small>₹</small><strong>{props.price}</strong></span> 
                                         <div className="Rating">
                                         {Array(props.rating).fill().map((_,index)=>{
                                         return <p>⭐</p>

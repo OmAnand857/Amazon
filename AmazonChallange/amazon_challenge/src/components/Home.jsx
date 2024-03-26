@@ -33,37 +33,37 @@ function Home(props){
             </div>
             <div className="home_rows">
             <Product
-                title="Titan Analog Rose Gold Dial Men's Watch-90148KD03/NR90148KD03"
-                rating={2}
-                price={13296}
+                title="Apple iPhone 13 (128GB) - Blue"
+                rating={4}
+                price={7000}
                 id={3}
-                image="https://m.media-amazon.com/images/I/517XvKSRvCL._AC_UL480_FMwebp_QL65_.jpg"
+                image="https://m.media-amazon.com/images/I/3150P3KQFlL._SY445_SX342_QL70_FMwebp_.jpg"
                 
             />
             <Product
-                title="Titan Analog Rose Gold Dial Men's Watch-90148KD03/NR90148KD03"
-                rating={2}
+                title="Apple 2024 MacBook Air 13″ Laptop with M3 chip: 34.46 cm (13.6″) Liquid Retina Display, 8GB Unified Memory, 256GB SSD Storage, Backlit Keyboard, 1080p FaceTime HD Camera, Touch ID- Midnight"
+                rating={5}
                 id={4}
-                price={13296}
-                image="https://m.media-amazon.com/images/I/517XvKSRvCL._AC_UL480_FMwebp_QL65_.jpg"
+                price={1200}
+                image="https://m.media-amazon.com/images/I/71-D1xCuVwL._SX679_.jpg"
                 
             />
             <Product
-                title="Titan Analog Rose Gold Dial Men's Watch-90148KD03/NR90148KD03"
-                rating={2}
+                title="The Theory Of Everything"
+                rating={5}
                 id={5}
-                price={13296}
-                image="https://m.media-amazon.com/images/I/517XvKSRvCL._AC_UL480_FMwebp_QL65_.jpg"
+                price={196}
+                image="https://m.media-amazon.com/images/I/71vfo4cJCjL._SY425_.jpg"
                 
             />
             </div>
             <div className="home_rows">
             <Product
-                title="Titan Analog Rose Gold Dial Men's Watch-90148KD03/NR90148KD03"
-                rating={2}
+                title="OnePlus 12 (Silky Black, 12GB RAM, 256GB Storage)"
+                rating={4}
                 id={6}
-                price={13296}
-                image="https://m.media-amazon.com/images/I/517XvKSRvCL._AC_UL480_FMwebp_QL65_.jpg"
+                price={596}
+                image="https://m.media-amazon.com/images/I/71o8VehMHXL._SX679_.jpg"
                
             />
             </div>
